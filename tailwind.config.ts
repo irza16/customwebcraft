@@ -9,21 +9,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#f2f0ec",
-        sand: "#0b0c0f",
-        paper: "#14171c",
-        clay: "#ff6b35",
-        line: "#242a32",
-        muted: "#8b8f98",
+        bg: {
+          primary: "#0A0A0B",
+          secondary: "#121214",
+        },
+        accent: {
+          gold: "#C9972E",
+          muted: "#8A6A2E",
+        },
+        text: {
+          heading: "#F7F1E8",
+          body: "#A8A39A",
+        },
+        support: {
+          terracotta: "#8C4A34",
+        },
+        line: "#24242A",
       },
       fontFamily: {
         display: ["var(--font-display)", "sans-serif"],
         body: ["var(--font-body)", "sans-serif"],
       },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "shutter-ribbing": "repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)",
       },
     },
   },

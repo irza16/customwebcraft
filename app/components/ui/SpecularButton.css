@@ -1,0 +1,31 @@
+.specular-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  overflow: hidden;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.specular-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.18) 45%, transparent 100%);
+  transform: translateX(-120%);
+  transition: transform 550ms ease;
+}
+
+.specular-button:hover::before,
+.specular-button:focus-visible::before {
+  transform: translateX(120%);
+}
+
+.specular-button:focus-visible {
+  outline: 2px solid rgba(232, 101, 26, 0.5);
+  outline-offset: 2px;
+}

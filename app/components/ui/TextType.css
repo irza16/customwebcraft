@@ -1,0 +1,18 @@
+.text-type-shell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.text-type-text {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.text-type-cursor {
+  display: inline-block;
+  margin-left: 0.15rem;
+  width: 0.06em;
+  transform: translateY(0.04em);
+}

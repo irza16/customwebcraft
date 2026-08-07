@@ -1,0 +1,27 @@
+.staggered-menu-shell {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.staggered-menu-panel {
+  background: #0f0f0f !important;
+}
+
+.sm-panel-item,
+.sm-socials-link {
+  color: #f0ede6 !important;
+}
+
+.sm-menu-button {
+  min-height: 48px;
+  min-width: 48px;
+}
+
+@media (max-width: 639px) {
+  .staggered-menu-panel {
+    width: 100vw !important;
+  }
+}

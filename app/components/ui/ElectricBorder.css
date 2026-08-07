@@ -1,0 +1,26 @@
+.electric-border-shell {
+  position: relative;
+  display: inline-block;
+  border-radius: inherit;
+  isolation: isolate;
+}
+
+.electric-border-shell::before,
+.electric-border-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.electric-border-shell::before {
+  border: 1px solid rgba(232, 101, 26, 0.25);
+  box-shadow: inset 0 0 18px rgba(232, 101, 26, 0.12);
+}
+
+.electric-border-shell::after {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transform: scale(0.98);
+}
