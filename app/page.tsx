@@ -1,12 +1,13 @@
 ﻿"use client";
 
 import { motion, useReducedMotion, Variants } from "framer-motion";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { SectionReveal } from "./components/SectionReveal";
 import StaggeredMenu from "./components/ui/StaggeredMenu";
 import Stepper from "./components/ui/Stepper";
+import dynamic from 'next/dynamic';
+import BlurText from "./components/ui/BlurText";
 
 const projects = [
   {
@@ -63,7 +64,6 @@ const BorderGlow = dynamic(() => import("./components/ui/BorderGlow"), { ssr: fa
 const ElectricBorder = dynamic(() => import("./components/ui/ElectricBorder"), { ssr: false });
 const RotatingText = dynamic(() => import("./components/ui/RotatingText"), { ssr: false });
 const SpecularButton = dynamic(() => import("./components/ui/SpecularButton"), { ssr: false });
-const StrokeText = dynamic(() => import("./components/ui/StrokeText"), { ssr: false });
 const TextType = dynamic(() => import("./components/ui/TextType"), { ssr: false });
 
 const pricingCards = [
@@ -119,28 +119,6 @@ const cardVariants: Variants = {
 };
 
 export default function Home() {
-  const reduced = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
-  const [fontSize, setFontSize] = useState(160);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const update = () => {
-      const width = window.innerWidth;
-      setIsMobile(width < 640);
-      setFontSize(width < 640 ? 52 : width < 1024 ? 100 : 160);
-    };
-
-    update();
-    window.addEventListener("resize", update);
-
-    return () => window.removeEventListener("resize", update);
-  }, []);
-
-  const wordmarkHeight = isMobile ? "45%" : "55%";
-  const copyHeight = isMobile ? "55%" : "50%";
-
   return (
     <main className="min-h-screen overflow-x-hidden bg-[var(--bg)] text-[var(--text-primary)]">
       <StaggeredMenu
@@ -165,155 +143,91 @@ export default function Home() {
         ]}
       />
 
-      <section id="hero" className="relative min-h-[100vh] overflow-hidden bg-[var(--bg)]">
-        <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+      <section id="hero" style={{ position: 'relative', width: '100%', minHeight: '100vh', overflow: 'hidden', backgroundColor: '#080808', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
           <Aurora colorStops={["#e8651a", "#1a1a1a", "#e8651a"]} blend={0.35} amplitude={0.8} speed={0.3} />
         </div>
 
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: wordmarkHeight,
-            zIndex: 1,
-            display: "flex",
-            alignItems: "center",
-            padding: "0 1rem",
-          }}
-        >
-          <StrokeText
+        {/* Hero wordmark */}
+        <div style={{ position: 'relative', zIndex: 1, width: '100%', paddingTop: '0', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '55vh' }}>
+          <BlurText
             text="customwebcraft"
-            strokeColor="#e8651a"
-            fillColor="#f0ede6"
-            strokeWidth={0.8}
-            drawDuration={2.2}
-            fillDelay={0.4}
-            stagger={0.04}
-            ease="power3.out"
-            trigger="mount"
-            fillMode="wipe"
-            fontSize={fontSize}
-            fontWeight={900}
-            letterSpacing={-6}
+            delay={80}
+            animateBy="characters"
+            direction="top"
+            startOnView={false}
+            className="hero-wordmark"
+            stepDuration={0.4}
           />
         </div>
 
-        <motion.div
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: copyHeight,
-            zIndex: 2,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            padding: "2rem 1.5rem",
-          }}
-          initial={reduced ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
-          <div style={{ maxWidth: "760px", width: "100%" }}>
-            <div
-              style={{
-                fontSize: "clamp(1rem, 2.2vw, 1.4rem)",
-                fontWeight: 500,
-                color: "#f0ede6",
-                maxWidth: "680px",
-                lineHeight: 1.5,
-                margin: "0 auto 1.25rem",
-                minHeight: "3.8rem",
-              }}
-            >
-              <TextType
-                texts={[
-                  "Websites for local businesses that deserve to look as good online as they do in person.",
-                  "Built in 7 days. Designed to convert. Made for Karachi.",
-                ]}
-                typingSpeed={40}
-                pauseDuration={3000}
-                deletingSpeed={20}
-                showCursor={true}
-                cursorCharacter="|"
-                cursorClassName="text-orange-500"
-                loop={true}
-              />
-            </div>
+        {/* Copy — bottom, normal flow */}
+        <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem', textAlign: 'center', paddingBottom: '4rem' }}>
+    <div style={{
+  fontSize: 'clamp(1rem, 4vw, 1.4rem)',
+  fontWeight: 500,
+  color: '#f0ede6',
+  maxWidth: '90vw',
+  lineHeight: 1.5,
+  marginBottom: '1.25rem',
+  minHeight: '3.8rem',
+  textAlign: 'center',
+  padding: '0 1rem',
+  wordBreak: 'break-word',
+}}>
+  Websites for{' '}
+  <span style={{ color: '#e8651a', fontWeight: 700 }}>local businesses</span>
+  {' '}that deserve to look as good online as they do in person.
+</div>
 
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                fontSize: "clamp(0.85rem, 1.6vw, 1rem)",
-                color: "#888880",
-                marginBottom: "2rem",
-                flexWrap: "wrap",
-                justifyContent: "center",
-                maxWidth: isMobile ? "90vw" : "100%",
-                overflow: "hidden",
-              }}
-            >
-              <span>For</span>
-              <RotatingText
-                texts={[
-                  "cafes & coffee shops",
-                  "salons & spas",
-                  "clothing brands",
-                  "restaurants",
-                  "real estate agents",
-                  "freelancers & portfolios",
-                  "ecommerce stores",
-                  "medical clinics",
-                  "law firms",
-                  "gyms & fitness studios",
-                  "educational institutes",
-                  "tour & travel agencies",
-                  "auto workshops",
-                  "interior designers",
-                  "wedding planners",
-                ]}
-                mainClassName="px-3 py-1 rounded-md overflow-hidden"
-                style={{ backgroundColor: "rgba(232,101,26,0.12)", color: "#e8651a", fontWeight: 600 }}
-                staggerFrom="last"
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                exit={{ y: "-120%" }}
-                staggerDuration={0.03}
-                splitLevelClassName="overflow-hidden"
-                transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                rotationInterval={2000}
-              />
-            </div>
+    <div style={{
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.4rem',
+  fontSize: 'clamp(0.9rem, 3.5vw, 1rem)',
+  color: '#888880',
+  marginBottom: '2rem',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
+  maxWidth: '90vw',
+  overflow: 'hidden',
+}}>
+  <span style={{ color: '#888880' }}>For</span>
+  <span style={{
+    backgroundColor: 'rgba(232,101,26,0.15)',
+    color: '#e8651a',
+    padding: '2px 10px',
+    borderRadius: '6px',
+    fontWeight: 600,
+    minWidth: '180px',
+    textAlign: 'center',
+    display: 'inline-block',
+    overflow: 'hidden',
+  }}>
+    <RotatingText
+      texts={["cafes & coffee shops","salons & spas","clothing brands","restaurants","real estate agents","freelancers","ecommerce stores","medical clinics","law firms","gyms & fitness studios","educational institutes","tour & travel agencies","auto workshops","interior designers","wedding planners"]}
+      mainClassName=""
+      staggerFrom="last"
+      initial={{ y: "100%" }}
+      animate={{ y: 0 }}
+      exit={{ y: "-120%" }}
+      staggerDuration={0.03}
+      splitLevelClassName="overflow-hidden"
+      transition={{ type: "spring", damping: 30, stiffness: 400 }}
+      rotationInterval={2000}
+    />
+  </span>
+</div>
 
-            <ElectricBorder color="#e8651a" speed={0.8} chaos={0.08} borderRadius={14} style={{ display: "inline-block" }}>
-              <SpecularButton
-                size="lg"
-                radius={14}
-                tint="#e8651a"
-                tintOpacity={0.12}
-                textColor="#f0ede6"
-                lineColor="#e8651a"
-                baseColor="#5a2a0a"
-                intensity={1.2}
-                shineSize={12}
-                shineFade={45}
-                followMouse={true}
-                proximity={300}
-                onClick={() => window.open("mailto:thecreative956@gmail.com?subject=Book a Free Demo", "_blank")}
-              >
-                Book a Free Demo →
-              </SpecularButton>
-            </ElectricBorder>
-          </div>
-        </motion.div>
-      </section>
+    <ElectricBorder color="#e8651a" speed={0.8} chaos={0.08} borderRadius={14} style={{ display: 'inline-block' }}>
+      <SpecularButton size="lg" radius={14} tint="#e8651a" tintOpacity={0.12} textColor="#f0ede6" lineColor="#e8651a" baseColor="#5a2a0a" intensity={1.2} shineSize={12} shineFade={45} followMouse={true} proximity={300} onClick={() => window.open('mailto:thecreative956@gmail.com?subject=Book a Free Demo', '_blank')}>
+        Book a Free Demo →
+      </SpecularButton>
+    </ElectricBorder>
+  </div>
+
+</section>
 
       <SectionReveal id="work" delay={0.04} className="mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 lg:py-24">
         <h2 style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 800, color: "#f0ede6", marginBottom: "3rem" }}>
@@ -451,7 +365,7 @@ export default function Home() {
       <SectionReveal id="contact" delay={0.1} className="mx-auto w-full max-w-6xl px-5 pb-24 pt-20 sm:px-8 lg:pt-24">
         <section style={{ padding: "6rem 1.5rem 4rem", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
           <div style={{ overflow: "hidden", marginBottom: "3rem" }}>
-            <h2 style={{ fontSize: isMobile ? "clamp(3rem, 18vw, 7rem)" : "clamp(4.5rem, 15vw, 14rem)", fontWeight: 900, color: "#f0ede6", textTransform: "uppercase", letterSpacing: "-6px", lineHeight: 0.85, margin: 0, whiteSpace: "normal", wordBreak: "break-word" }}>
+            <h2 style={{ fontSize: "clamp(3.5rem, 15vw, 10rem)", fontWeight: 900, color: "#f0ede6", textTransform: "uppercase", letterSpacing: "-6px", lineHeight: 0.85, margin: 0, whiteSpace: "normal", wordBreak: "break-word" }}>
               LET&apos;S BUILD
             </h2>
           </div>

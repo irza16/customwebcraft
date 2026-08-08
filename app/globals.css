@@ -81,3 +81,32 @@ body {
 .process-stepper .step-indicator-inner[data-animate="active"] {
   background-color: #e8651a !important;
 }
+
+/* StaggeredMenu panel fix */
+.staggered-menu-panel {
+  background: #0f0f0f !important;
+}
+.sm-panel-item,
+.sm-socials-link,
+.sm-panel-itemLabel {
+  color: #f0ede6 !important;
+}
+
+/* Hero wordmark */
+.hero-wordmark {
+  font-size: clamp(3.5rem, 14vw, 12rem);
+  font-weight: 900;
+  color: #f0ede6;
+  letter-spacing: -4px;
+  line-height: 0.9;
+  text-transform: lowercase;
+  justify-content: center !important;
+}
+
+@media (max-width: 480px) {
+  .hero-wordmark {
+    font-size: clamp(3rem, 18vw, 5rem);
+    letter-spacing: -2px;
+    word-break: break-all;
+  }
+}
