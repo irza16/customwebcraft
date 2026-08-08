@@ -143,15 +143,27 @@ export default function Home() {
         ]}
       />
 
-      <section id="hero" style={{ position: 'relative', width: '100%', minHeight: '100vh', overflow: 'hidden', backgroundColor: '#080808', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-
+<section
+  id="hero"
+  style={{
+    position: 'relative',
+    width: '100%',
+    minHeight: '100vh',
+    overflow: 'hidden',
+    backgroundColor: '#080808',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }}
+>
         <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
           <Aurora colorStops={["#e8651a", "#1a1a1a", "#e8651a"]} blend={0.35} amplitude={0.8} speed={0.3} />
         </div>
 
         {/* Hero wordmark */}
-        <div style={{ position: 'relative', zIndex: 1, width: '100%', paddingTop: '0', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '55vh' }}>
-          <BlurText
+<div style={{ position: 'relative', zIndex: 1, width: '100%', textAlign: 'center' }}>
+            <BlurText
             text="customwebcraft"
             delay={80}
             animateBy="characters"
@@ -163,8 +175,7 @@ export default function Home() {
         </div>
 
         {/* Copy — bottom, normal flow */}
-        <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem', textAlign: 'center', paddingBottom: '4rem' }}>
-    <div style={{
+<div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem', textAlign: 'center', marginTop: '2rem' }}>    <div style={{
   fontSize: 'clamp(1rem, 4vw, 1.4rem)',
   fontWeight: 500,
   color: '#f0ede6',
