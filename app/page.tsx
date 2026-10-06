@@ -9,7 +9,33 @@ import Stepper from "./components/ui/Stepper";
 import dynamic from 'next/dynamic';
 import BlurText from "./components/ui/BlurText";
 
-const projects = [
+type Project = {
+  name: string;
+  url: string;
+  description: string;
+  tags: string[];
+  imageSrc?: string;
+  label: string;
+};
+
+const projects: Project[] = [
+  {
+    name: "Velvo Living",
+    url: "https://velvoliving.co.uk",
+    description:
+      "A UK furniture and mattress e-commerce store with 195+ products, size and firmness variations, PayPal checkout, and SEO built in from day one.",
+    tags: ["WordPress", "WooCommerce", "Elementor"],
+    label: "Live client · UK",
+  },
+  {
+    name: "imcan.pk",
+    url: "https://www.imcan.pk",
+    // TODO: replace with the client's business, goal, and a measurable result
+    description:
+      "A custom Next.js build for a Pakistani business, designed to load fast, rank well, and turn visitors into enquiries.",
+    tags: ["Next.js", "Tailwind CSS"],
+    label: "Live client · Pakistan",
+  },
   {
     name: "aesco.pk",
     url: "https://zeen-demo.vercel.app",
@@ -17,6 +43,7 @@ const projects = [
       "A polished, conversion-first site for a local brand with storytelling-led sections and a clear path to inquiry.",
     tags: ["Next.js", "Tailwind CSS"],
     imageSrc: "/aesco-screenshot.jpeg",
+    label: "Concept",
   },
   {
     name: "Brewed.",
@@ -25,6 +52,7 @@ const projects = [
       "A warm, premium hospitality experience with atmosphere-first visuals and a frictionless contact funnel.",
     tags: ["Next.js", "Framer Motion"],
     imageSrc: "/brewed-screenshot.jpeg",
+    label: "Concept",
   },
 ];
 
@@ -260,15 +288,22 @@ export default function Home() {
               style={{ minWidth: "340px", maxWidth: "420px", flex: "0 0 auto", scrollSnapAlign: "start" }}
             >
               <div style={{ overflow: "hidden", height: "240px", borderRadius: "12px 12px 0 0" }}>
-                <Image
-                  src={project.imageSrc}
-                  alt={project.name}
-                  width={800}
-                  height={600}
-                  style={{ width: "100%", height: "auto", display: "block", animation: "panDown 8s ease-in-out infinite alternate" }}
-                />
+                {project.imageSrc ? (
+                  <Image
+                    src={project.imageSrc}
+                    alt={`${project.name} website screenshot`}
+                    width={800}
+                    height={600}
+                    style={{ width: "100%", height: "auto", display: "block", animation: "panDown 8s ease-in-out infinite alternate" }}
+                  />
+                ) : (
+                  <div style={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "radial-gradient(circle at 30% 20%, rgba(232,101,26,0.35), transparent 60%), #141414", color: "#f0ede6", fontWeight: 800, fontSize: "1.8rem", letterSpacing: "-1px" }}>
+                    {project.url.replace(/^https:\/\/(www\.)?/, "")}
+                  </div>
+                )}
               </div>
               <div style={{ padding: "1.25rem" }}>
+                <p style={{ color: "#e8651a", fontSize: "0.7rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "1.5px", marginBottom: "0.4rem" }}>{project.label}</p>
                 <h3 style={{ color: "#f0ede6", fontWeight: 700, fontSize: "1.2rem", marginBottom: "0.5rem" }}>{project.name}</h3>
                 <p style={{ color: "#888880", fontSize: "0.9rem", lineHeight: 1.5, marginBottom: "1rem" }}>{project.description}</p>
                 <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
@@ -278,6 +313,9 @@ export default function Home() {
                     </span>
                   ))}
                 </div>
+                <a href={project.url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", marginTop: "1rem", color: "#f0ede6", fontWeight: 600, fontSize: "0.85rem", textDecoration: "underline", textUnderlineOffset: "4px" }}>
+                  Visit live site →
+                </a>
               </div>
             </BorderGlow>
           ))}
