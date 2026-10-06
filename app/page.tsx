@@ -23,17 +23,18 @@ const projects: Project[] = [
     name: "Velvo Living",
     url: "https://velvoliving.co.uk",
     description:
-      "A UK furniture and mattress e-commerce store with 195+ products, size and firmness variations, PayPal checkout, and SEO built in from day one.",
+      "A UK bed, mattress and furniture store with 195+ products, flash-sale countdowns, mega-menu navigation, customer reviews, size and firmness options, and PayPal checkout.",
     tags: ["WordPress", "WooCommerce", "Elementor"],
+    imageSrc: "/velvo-screenshot.jpg",
     label: "Live client · UK",
   },
   {
-    name: "imcan.pk",
+    name: "Imam Institute (imcan.pk)",
     url: "https://www.imcan.pk",
-    // TODO: replace with the client's business, goal, and a measurable result
     description:
-      "A custom Next.js build for a Pakistani business, designed to load fast, rank well, and turn visitors into enquiries.",
+      "Website for a PNMC-registered nursing and allied health institute in Jacobabad, with an admissions-first hero, campus video, accreditation highlights, and programme pages for 500+ students.",
     tags: ["Next.js", "Tailwind CSS"],
+    imageSrc: "/imcan-screenshot.jpg",
     label: "Live client · Pakistan",
   },
   {
